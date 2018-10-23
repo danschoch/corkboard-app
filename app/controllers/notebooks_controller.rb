@@ -35,6 +35,7 @@ class NotebooksController < ApplicationController
     get '/notebooks/:id' do
         if logged_in?
             @notebook = Notebook.find_by_id(params[:id])
+            @notes = @notebook.notes.all
             erb :'notebooks/show'
         else
             redirect to '/login'

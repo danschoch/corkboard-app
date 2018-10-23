@@ -1,0 +1,20 @@
+<h2><%= @notebook.name %></h2>
+<h3><%= @notebook.description%></h3>
+<h4>Last Updated: <%= @notebook.updated_at.strftime("%D") %></h4>
+<br></br>
+
+<h3>Notes</h3>
+<% @notes.each do |note| %>
+  <div class="note">
+    <h4><%= note.title %></h4>
+    <p><%= note.content%></p>
+    <a href="/notes/<%= note.id %>">View Note</a>
+  </div>
+<% end %>
+
+<form method="post" action="/notebooks/<%=@notebook.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Notebook">
+</form>
+
+<a href="/notebooks">Notebooks</a>
