@@ -7,4 +7,13 @@ class NotebooksController < ApplicationController
             redirect to '/login'
         end
     end
+
+    get '/notebooks/new' do
+        if logged_in?
+            @user = current_user
+            erb :'/notebooks/new'
+        else
+            redirect to '/login'
+        end
+    end
 end
