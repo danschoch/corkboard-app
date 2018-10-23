@@ -20,7 +20,7 @@ class NotebooksController < ApplicationController
     post '/notebooks' do
         if logged_in?
             if params[:notebook_name] !=""
-                @notebook = Notebook.new(name: params[:notebook_name], decription: params[:notebook_description])
+                @notebook = Notebook.new(name: params[:notebook_name], description: params[:notebook_description])
                 current_user.notebooks << @notebook
                 @notebook.save
                 redirect to "/notebooks/#{@notebook.id}"
@@ -33,7 +33,12 @@ class NotebooksController < ApplicationController
     end
 
     get '/notebooks/:id' do
-        
+        if logged_in?
+            @notebook = Notebook.find_by_id(params[:id])
+            erb :'notebooks/show'
+        else
+            redirect to '/login'
+        end
     end
 
 end
