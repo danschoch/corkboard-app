@@ -3,7 +3,7 @@
 Notebook/Journal app
 
 - Users have many notebooks
-    - attr: username, email, password
+    - attr: username, email, password_digest
     - initial signup could suggest types of notebook (daily journal, reminder list, etc.)
     - option to create custom notebooks
 - Notebooks belong to user, have many notes
