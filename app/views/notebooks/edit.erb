@@ -1,0 +1,11 @@
+<h2> Edit This Notebook</h2>
+
+<form method="post" action="/notebooks/<%= @notebook.id %>">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+    <p>Notebook Name: <input type="text" id="notebook_name" name="notebook_name" value="<%= @notebook.name %>"></p>
+    <p>Description: <input type="text" id="notebook_description" name="notebook_description" value="<%= @notebook.description %>"></p>
+    <input type="submit" value="Create Notebook">
+</form>
+
+<p><a href="/">Notebooks</a></p>
+<p><a href="/logout">Log Out</a></p>
