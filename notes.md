@@ -12,4 +12,4 @@ Notebook/Journal app
     - description should be optional
 - Notes belong to notebook
     - attr: title, content, notebook_id, datetime(?)
-    - make content optional for reminder list, add datetime?
+    - make content optional for reminder list, add datetime fpr due date?
