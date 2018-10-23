@@ -40,17 +40,16 @@ class UsersController < ApplicationController
         else
             redirect to '/login'
         end
-    end
-=begin   
+    end 
 
     get '/logout' do
         session.clear
-        redirect "/login"
+        redirect "/index"
     end
 
     get '/users/:slug' do
         @user = User.find_by_slug(params[:slug])
-        erb :'users/show'
+        redirect to '/notebooks'
     end
-=end
+
 end
