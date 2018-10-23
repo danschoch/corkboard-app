@@ -4,7 +4,7 @@
 <% @user.notebooks.each do |notebook|%>
     <div>
         <h4><a href="/notebooks/<%= notebook.id %>"><%= notebook.name %></a></h4>
-        <p><%= notebook.description%></p>
+        <p> - <%= notebook.description%></p>
     </div>
 <% end %>
 
