@@ -23,13 +23,12 @@ class UsersController < ApplicationController
             redirect to '/notebooks'
         end
     end
-
-=begin    
+ 
     get '/login' do
         if logged_in?
-            redirect to '/tweets'
+            redirect to '/notebooks'
         else
-            erb :'users/login'
+            erb :'sessions/login'
         end
     end
 
@@ -37,11 +36,12 @@ class UsersController < ApplicationController
         user = User.find_by(:username => params[:username])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
-            redirect to '/tweets'
+            redirect to '/notebooks'
         else
-            redirect to '/signup'
+            redirect to '/login'
         end
     end
+=begin   
 
     get '/logout' do
         session.clear
