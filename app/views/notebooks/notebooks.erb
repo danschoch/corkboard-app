@@ -1,0 +1,12 @@
+<h2>Welcome, <%= @user.username %></h2>
+
+<h3>Current Notebooks</h3>
+<% @user.notebooks.each do |notebook|%>
+    <div>
+        <h4><a href="/notebooks/<%= notebook.id %>"><%= notebook.name %></a></h4>
+        <p><%= notebook.description%></p>
+    </div>
+<% end %>
+
+<p><a href="/notebooks/new">Create a new notebook</a></p>
+<p><a href="/logout">Log Out</a></p>
