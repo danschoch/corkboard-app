@@ -8,9 +8,14 @@
   <div class="note">
     <h4><%= note.title %></h4>
     <p><%= note.content%></p>
-    <a href="/notes/<%= note.id %>">View Note</a>
+    <a href="/notes/<%= note.id %>/edit">Edit Note</a>
+    <form method="post" action="/notes/<%= note.id %>/delete">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete Note">
+    </form>
   </div>
 <% end %>
+<h4><a href="/notes/new">Add a new note</a></h4>
 
 <form method="post" action="/notebooks/<%=@notebook.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">

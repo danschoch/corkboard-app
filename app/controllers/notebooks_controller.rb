@@ -42,4 +42,18 @@ class NotebooksController < ApplicationController
         end
     end
 
+    delete '/notebooks/:id/delete' do
+        if logged_in?
+            @notebook = Notebook.find_by_id(params[:id])
+            if @notebook && @notebook.user == current_user
+                @notebook.delete
+                redirect to '/notebooks'
+            else
+                redirect to '/notebooks'
+            end
+        else
+            redirect to '/login'
+        end
+    end
+
 end
