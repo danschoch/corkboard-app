@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181023165535) do
+ActiveRecord::Schema.define(version: 20181024000235) do
+
+  create_table "note_notebooks", force: :cascade do |t|
+    t.integer "note_id"
+    t.integer "notebook_id"
+  end
 
   create_table "notebooks", force: :cascade do |t|
     t.string   "name"
@@ -24,7 +29,6 @@ ActiveRecord::Schema.define(version: 20181023165535) do
   create_table "notes", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
-    t.integer  "notebook_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
