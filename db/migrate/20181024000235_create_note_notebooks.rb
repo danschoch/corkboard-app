@@ -3,5 +3,6 @@ class CreateNoteNotebooks < ActiveRecord::Migration
     create_table :note_notebooks do |t|
       t.integer :note_id
       t.integer :notebook_id
+    end
   end
 end
