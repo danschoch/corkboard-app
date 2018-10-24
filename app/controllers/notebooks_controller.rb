@@ -19,13 +19,13 @@ class NotebooksController < ApplicationController
 
     post '/notebooks' do
         if logged_in?
-            if params[:notebook_name] !=""
+            if params[:notebook_name] == ""
+                redirect to '/notebooks/new'
+            else
                 @notebook = Notebook.new(name: params[:notebook_name], description: params[:notebook_description])
                 current_user.notebooks << @notebook
                 @notebook.save
                 redirect to "/notebooks/#{@notebook.id}"
-            else
-                redirect to '/notebooks/new'
             end
         else
             redirect to '/login'
@@ -35,9 +35,13 @@ class NotebooksController < ApplicationController
     get '/notebooks/:id' do
         if logged_in?
             @notebook = Notebook.find_by_id(params[:id])
-            @local_time = @notebook.updated_at.localtime.strftime("%D")
-            @notes = Note.all.select {|note| note.notebook_ids.include?(@notebook.id)}
-            erb :'notebooks/show'
+            if @notebook.user_id == current_user.id
+                @local_time = @notebook.updated_at.localtime.strftime("%D")
+                @notes = Note.all.select {|note| note.notebook_ids.include?(@notebook.id)}
+                erb :'notebooks/show'
+            else
+                redirect to '/logout'
+            end
         else
             redirect to '/login'
         end
@@ -46,7 +50,11 @@ class NotebooksController < ApplicationController
     get '/notebooks/:id/edit' do
         if logged_in?
             @notebook = Notebook.find_by_id(params[:id])
-            erb :'notebooks/edit'
+            if @notebook.user_id == current_user.id
+                erb :'notebooks/edit'
+            else
+                redirect to '/logout'
+            end
         else
             redirect to '/login'
         end
@@ -54,13 +62,17 @@ class NotebooksController < ApplicationController
 
     patch '/notebooks/:id' do
         if logged_in?
-            if params[:notebook_name] !=""
-                @notebook = Notebook.find_by_id(params[:id])
-                @notebook.update(name: params[:notebook_name], description: params[:notebook_description])
-                @notebook.save
-                redirect to "/notebooks/#{@notebook.id}"
-            else
+            if params[:notebook_name] == ""
                 redirect to '/notebooks'
+            else
+                @notebook = Notebook.find_by_id(params[:id])
+                if @notebook && @notebook.user == current_user
+                    @notebook.update(name: params[:notebook_name], description: params[:notebook_description])
+                    @notebook.save
+                    redirect to "/notebooks/#{@notebook.id}"
+                else
+                    redirect to '/notebooks'
+                end
             end
         else
             redirect to '/login'

@@ -4,7 +4,7 @@
     <p>Title: <input type="text" id="note_title" name="note_title"></p>
     <p>Content: <input type="text" id="note_content" name="note_content"></p>
     <p>Choose Which Notebook To Add This Note To</h3>
-    <% Notebook.all.each do |notebook| %>
+    <% current_user.notebooks.all.each do |notebook| %>
         <p><%= notebook.name %><input type="checkbox" id="notebook_<%= notebook.id %>" name="notebooks[]" value="<%= notebook.id %>"></p>
     <%end%>
     <input type="submit" value="Create Note">
