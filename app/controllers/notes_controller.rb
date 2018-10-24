@@ -42,10 +42,7 @@ class NotesController < ApplicationController
 
                 #@current_notebook.notes<< @note if !@current_notebook.notes.include?(@note)
 
-                
-
                 @note.save
-                binding.pry
                 redirect to "/notebooks"
             else
                 redirect to '/notebooks'
