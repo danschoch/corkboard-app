@@ -11,12 +11,11 @@ class NotesController < ApplicationController
         if logged_in?
             if params[:note_title] !=""
                 @note = Note.new(title: params[:note_title], content: params[:note_content])
-                @current_notebook = Notebook.find_by_id(params[:notebook_id])
-                @current_notebook.notes<< @note
+                @note.notebook_ids = params[:notebooks]
                 @note.save
-                redirect to "/notebooks/#{@current_notebook.id}"
+                redirect to "/notebooks"
             else
-                redirect to "/notebooks/#{@current_notebook.id}"
+                redirect to "/notebooks"
             end
         else
             redirect to '/login'
@@ -54,9 +53,14 @@ class NotesController < ApplicationController
     delete '/notes/:id/delete' do
         if logged_in?
             @note = Note.find_by_id(params[:id])
-            @current_notebook = Notebook.find_by_id(@note.notebook_id)
-            if @note #&& current_user.notebooks.include?(@current_notebook)
+            @note_notebook_conn = NoteNotebook.find_by_note(@note.id)
+            @current_notebook = Notebook.find_by_id(@note_notebook_conn.notebook_id)
+            if @note && @note.notebook_ids.length <= 1 #&& current_user.notebooks.include?(@current_notebook)
+                @note_notebook_conn.delete
                 @note.delete
+                redirect to "/notebooks/#{@current_notebook.id}"
+            elsif @note && @note.notebook_ids.length > 1
+                @note_notebook_conn.delete
                 redirect to "/notebooks/#{@current_notebook.id}"
             else
                 redirect to '/notebooks'
