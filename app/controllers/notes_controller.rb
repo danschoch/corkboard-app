@@ -12,6 +12,7 @@ class NotesController < ApplicationController
             if params[:note_title] !=""
                 @note = Note.new(title: params[:note_title], content: params[:note_content])
                 @note.notebook_ids = params[:notebooks]
+                @note.user
                 @note.save
                 redirect to "/notebooks"
             else
