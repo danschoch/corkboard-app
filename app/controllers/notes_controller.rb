@@ -25,8 +25,8 @@ class NotesController < ApplicationController
     get '/notes/:id/edit' do
         if logged_in?
             @note = Note.find_by_id(params[:id])
-            if session[:user_id] == current_user.id
-                @note = Note.find_by_id(params[:id])
+            binding.pry
+            if @note.user_id == current_user.id
                 erb :'notes/edit_note'
             else
                 redirect to '/logout'

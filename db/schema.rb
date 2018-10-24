@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181024000235) do
+ActiveRecord::Schema.define(version: 20181024062455) do
 
   create_table "note_notebooks", force: :cascade do |t|
     t.integer "note_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20181024000235) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
