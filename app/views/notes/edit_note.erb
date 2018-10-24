@@ -6,7 +6,7 @@
     <p>Content: <input type="text" id="note_content" name="note_content" value="<%= @note.content %>"></p>
     <p>Choose Which Notebook To Add This Note To</h3>
     <% Notebook.all.each do |ntbk| %>
-        <p><%= ntbk.name %><input type="checkbox" id="notebook_<%= ntbk.id %>" name="notebook_id" value="<%= ntbk.id %>" <%='checked' if @note.notebook_ids.include?(ntbk.id) %>></p>
+        <p><%= ntbk.name %><input type="checkbox" id="notebook_<%= ntbk.id %>" name="notebooks[]" value="<%= ntbk.id %>" <%='checked' if @note.notebook_ids.include?(ntbk.id) %>></p>
     <%end%>
     <input type="submit" value="Submit Edits">
 </form>

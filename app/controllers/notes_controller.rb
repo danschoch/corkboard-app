@@ -38,10 +38,15 @@ class NotesController < ApplicationController
                 @current_notebook = Notebook.find_by_id(params[:notebook_id])
 
                 @note.update(title: params[:note_title], content: params[:note_content])
-                @current_notebook.notes<< @note if !@current_notebook.notes.include?(@note)
+                @note.notebook_ids = params[:notebooks]
+
+                #@current_notebook.notes<< @note if !@current_notebook.notes.include?(@note)
+
+                
 
                 @note.save
-                redirect to "/notebooks/#{@current_notebook.id}"
+                binding.pry
+                redirect to "/notebooks"
             else
                 redirect to '/notebooks'
             end
@@ -55,11 +60,11 @@ class NotesController < ApplicationController
             @note = Note.find_by_id(params[:id])
             @note_notebook_conn = NoteNotebook.find_by_note(@note.id)
             @current_notebook = Notebook.find_by_id(@note_notebook_conn.notebook_id)
-            if @note && @note.notebook_ids.length <= 1 #&& current_user.notebooks.include?(@current_notebook)
+            if @note && @note.notebook_ids.length <= 1 && current_user.notebooks.include?(@current_notebook)
                 @note_notebook_conn.delete
                 @note.delete
                 redirect to "/notebooks/#{@current_notebook.id}"
-            elsif @note && @note.notebook_ids.length > 1
+            elsif @note && @note.notebook_ids.length > 1 && current_user.notebooks.include?(@current_notebook)
                 @note_notebook_conn.delete
                 redirect to "/notebooks/#{@current_notebook.id}"
             else
