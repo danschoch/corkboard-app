@@ -1,7 +1,7 @@
 #Users
-@user1 = User.create(username: 'dan' , email: 'dan@dan.com' , password: 'password')
-@user2 = User.create(username: 'ines' , email: 'ines@ines.com' , password: 'password')
-@user3 = User.create(username: 'bug', email: 'bug@bug.com' , password: 'password')
+@user1 = User.create(username: 'dantheman' , email: 'dan@dan.com' , password: 'password')
+@user2 = User.create(username: 'inesthechick' , email: 'ines@ines.com' , password: 'password')
+@user3 = User.create(username: 'bugthekitty', email: 'bug@bug.com' , password: 'password')
 
 #Notebooks
 @notebook1 = Notebook.create(name: "Journal #{@user1.id}", description: "Description for Journal #{@user1.id}", user_id: @user1.id)
