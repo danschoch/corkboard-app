@@ -14,3 +14,9 @@ Notebook/Journal app
 - Notes belong to notebook
     - attr: title, content, notebook_id, datetime(?)
     - make content optional for reminder list, add datetime fpr due date?
+
+TODO (as of 10/25):
+ - add seeds to db
+ - test user authentication/authenticated access to other user data
+ - add edit user view/action
+ - add notes index view/action
