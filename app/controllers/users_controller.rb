@@ -15,7 +15,7 @@ class UsersController < ApplicationController
         user_emails = User.all.collect {|user| user.email}
         usernames = User.all.collect {|user| user.username}
 
-        if user_emails.include?(params[:email]) || usernames.include?(params[:username]) || params[:username] == "" || params[:email] == "" || params[:password] == ""
+        if user_emails.include?(params[:email]) || usernames.include?(params[:username]) || params[:username] == "" || params[:email] == "" || params[:password] == "" || params[:password] != params[:confirm_password]
             redirect to '/signup'
         else
             @user = User.create(username: params[:username], email: params[:email], password: params[:password])
