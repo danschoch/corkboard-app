@@ -1,4 +1,8 @@
+require 'rack-flash'
+
 class NotebooksController < ApplicationController
+    use Rack::Flash
+    
     get '/notebooks' do
         if logged_in?
             @user = current_user
