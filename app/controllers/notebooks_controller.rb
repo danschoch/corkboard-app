@@ -36,7 +36,7 @@ class NotebooksController < ApplicationController
         if logged_in?
             @notebook = Notebook.find_by_id(params[:id])
             if @notebook.user_id == current_user.id
-                @local_time = @notebook.updated_at.localtime.strftime("%D")
+                #@local_time = @notebook.updated_at.localtime.strftime("%D")
                 @notes = Note.all.select {|note| note.notebook_ids.include?(@notebook.id)}
                 erb :'notebooks/show'
             else

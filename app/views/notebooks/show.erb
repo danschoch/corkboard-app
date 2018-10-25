@@ -1,6 +1,6 @@
 <h2><%= @notebook.name %></h2>
 <h3><%= @notebook.description%></h3>
-<h4>Last Updated: <%= @local_time %></h4>
+<h4>Last Updated: <%= @notebook.most_recent_note_update %></h4>
 <br></br>
 
 <h3>Notes</h3>
@@ -15,6 +15,8 @@
     </form>
   </div>
 <% end %>
+
+<br></br>
 <h4><a href="/notes/new">Add a new note</a></h4>
 
 <h4><a href="/notebooks/<%= @notebook.id %>/edit">Edit This Notebook's Details</a></h4>
@@ -25,3 +27,4 @@
 </form>
 
 <a href="/notebooks">Notebooks</a>
+<p><a href="/logout">Log Out</a></p>
