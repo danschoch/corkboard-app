@@ -1,0 +1,12 @@
+<h2>Update your information below</h2>
+
+<form action="/users/<%= @user.id %>" method="post">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+    <p>Username: <input type="text" id="username" name="username" value="<%= @user.username %>"></p>
+    <p>Email: <input type="text" id="email" name="email" value="<%= @user.email %>"></p>
+    <p>Password: <input type="password" id="password" name="password" value="<%= @user.password %>"></p>
+    <p>Confirm Password: <input type="password" id="password" name="confirm_password" value="<%= @user.password %>"></p>
+    <input type="submit" value="Update Info">
+</form>
+
+<p><a href="/">Home Page</a></p>
