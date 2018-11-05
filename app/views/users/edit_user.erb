@@ -2,6 +2,8 @@
 
 <% if flash.has?(:message) %>
   <h4><%= flash[:message] %></h4>
+<% else %>
+  <h4>Be sure to enter your information into all fields, including re-entering your password.</h4>
 <% end %>
 
 <form action="/users/<%= @user.id %>" method="post">

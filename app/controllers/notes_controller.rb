@@ -7,12 +7,12 @@ class NotesController < ApplicationController
         end
     end
 
-    post '/notes/new' do
+    post '/notes' do
         if logged_in?
             if params[:note_title] !=""
                 @note = Note.new(title: params[:note_title], content: params[:note_content])
                 @note.notebook_ids = params[:notebooks]
-                @note.user
+                current_user.notes << @note
                 @note.save
                 redirect to "/notebooks"
             else
@@ -26,6 +26,7 @@ class NotesController < ApplicationController
     get '/notes/:id/edit' do
         if logged_in?
             @note = Note.find_by_id(params[:id])
+            binding.pry
             if @note.user_id == current_user.id
                 erb :'notes/edit_note'
             else
