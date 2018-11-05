@@ -8,6 +8,10 @@ class Notebook < ActiveRecord::Base
    end
 
    def most_recent_note_update
-    self.notes.order("updated_at DESC").first.updated_at_local
+    if self.notes.length >= 1
+        self.notes.order('updated_at DESC').first.updated_at_local
+    else
+        self.updated_at_local
+    end
    end
 end

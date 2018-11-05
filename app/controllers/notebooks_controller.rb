@@ -42,6 +42,8 @@ class NotebooksController < ApplicationController
             if @notebook.user_id == current_user.id
                 #@local_time = @notebook.updated_at.localtime.strftime("%D")
                 @notes = Note.all.select {|note| note.notebook_ids.include?(@notebook.id)}
+                #@update_time = @notebook.most_recent_note_update ||= @notebook.updated_at_local
+                binding.pry
                 erb :'notebooks/show'
             else
                 redirect to '/logout'
