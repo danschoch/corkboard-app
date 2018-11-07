@@ -4,12 +4,9 @@ class NotebooksController < ApplicationController
     use Rack::Flash
     
     get '/notebooks' do
-        if logged_in?
-            @user = current_user
-            erb :'/notebooks/notebooks'
-        else
-            redirect to '/login'
-        end
+        redirect_if_not_logged_in
+        @user = current_user
+        erb :'/notebooks/notebooks'
     end
 
     get '/notebooks/new' do
@@ -40,7 +37,8 @@ class NotebooksController < ApplicationController
         if logged_in?
             @notebook = Notebook.find_by_id(params[:id])
             if @notebook.user_id == current_user.id
-                @notes = Note.all.select {|note| note.notebook_ids.include?(@notebook.id)}
+                #@notes = Note.all.select {|note| note.notebook_ids.include?(@notebook.id)}
+                @notes = @notebook.notes
                 erb :'notebooks/show'
             else
                 redirect to '/logout'
