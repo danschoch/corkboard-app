@@ -46,8 +46,6 @@ class NotesController < ApplicationController
                 @note.update(title: params[:note_title], content: params[:note_content])
                 @note.notebook_ids = params[:notebooks]
 
-                #@current_notebook.notes<< @note if !@current_notebook.notes.include?(@note)
-
                 @note.save
                 redirect to "/notebooks"
             else
