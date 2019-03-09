@@ -15,7 +15,7 @@ gem 'pg'
 
 group :production do
   # Use Postgresql for ActiveRecord
-  gem 'pg'
+#   gem 'pg'
 end
 
 group :development, :test do
