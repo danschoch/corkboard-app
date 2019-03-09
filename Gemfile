@@ -11,6 +11,7 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'rack-flash3'
+gem 'pg'
 
 group :production do
   # Use Postgresql for ActiveRecord
