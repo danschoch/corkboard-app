@@ -1,7 +1,14 @@
-ENV['SINATRA_ENV'] ||= "development"
+require "yaml"
+
 
 require 'bundler/setup'
-Bundler.require(:default, ENV['SINATRA_ENV'])
+Bundler.require
+# (:default, ENV['SINATRA_ENV'])
+
+SIN_ENV = ENV['SINATRA_ENV'] ||= "development"
+DB_SETTINGS = YAML.load_file("config/database.yml")[SIN_ENV]
+ActiveRecord::Base.establish_connection(DB_SETTINGS)
+
 
 set :database_file, './database.yml'
 
